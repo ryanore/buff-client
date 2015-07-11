@@ -6,8 +6,10 @@ var CleanPlugin = require('clean-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 var buildDate = (new Date());
+var buildTarget = process.env.BUILD_TARGET || 'form';
+
+var tmpl = buildTarget === 'form' ? 'index' : 'bootstrap';
 
 var config = _.merge(
   webpackConfig({
@@ -26,17 +28,17 @@ var config = _.merge(
       }),
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
-      new ExtractTextPlugin('[name]-[hash].css'),
+      // new ExtractTextPlugin('[name]-[hash].css'),
       new webpack.NoErrorsPlugin(),
       new HtmlWebpackPlugin({
-        title: 'My React Application',
-        description: 'Sample React Application',
+        title: 'Production - '+buildTarget,
+        description: 'Description of '+buildTarget,
         filename: '../index.html',
         minify: {
           collapseWhitespace: true
         },
         inject: false,
-        template: './templates/prod/index.html',
+        template: './templates/prod/'+tmpl+'.html',
         buildDate: {
           unix: buildDate.getTime(),
           string: buildDate.toString(),
@@ -55,7 +57,7 @@ var config = _.merge(
   {
     output: {
       publicPath: '/assets/',
-      filename: '[name]-[hash].js'
+      filename: '[name].js'
     },
     cache: false,
     debug: false,

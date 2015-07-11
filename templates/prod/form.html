@@ -6,18 +6,14 @@
     <meta name="description" content="{%=o.htmlWebpackPlugin.options.description%}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="build" content="{%=o.htmlWebpackPlugin.options.buildDate.date%}" date="{%=o.htmlWebpackPlugin.options.buildDate.string%}" unix="{%=o.htmlWebpackPlugin.options.buildDate.unix%}">
-    <title>{%=o.htmlWebpackPlugin.options.title || 'Webpack App'%}</title>
-    {% if (o.htmlWebpackPlugin.files.favicon) { %}
-    <link rel="shortcut icon" href="{%=o.htmlWebpackPlugin.files.favicon%}">
-    {% } %}
+    <title></title>
     {% for (var css in o.htmlWebpackPlugin.files.css) { %}
     <link href="{%=o.htmlWebpackPlugin.files.css[css] %}" rel="stylesheet">
     {% } %}
   </head>
   <body>
+    <h1>Production - Form</h1>
     <div id="content"></div>
-    {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
-    <script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
-    {% } %}
+    <script src="assets/buff.js"></script>
   </body>
 </html>

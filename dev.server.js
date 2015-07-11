@@ -1,12 +1,13 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.dev.server.config');
+var buildTarget = process.env.BUILD_TARGET || 'form';
 
 new WebpackDevServer(webpack(config), {
-  hot: true,
+  hot: buildTarget === 'form',
   publicPath: config.output.publicPath,
   historyApiFallback: {
-    index: './templates/dev/index.html'
+    index: './templates/dev/'+buildTarget+'.html'
   },
   stats: {
     colors: true,

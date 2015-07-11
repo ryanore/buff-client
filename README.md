@@ -1,4 +1,6 @@
-# react-webpack-es6-boilerplate
+# BUFF - bootstrapped user feedback forms
+Webpack Build setup started with 
+@mikechau https://github.com/mikechau/react-webpack-es6-boilerplate
 
 ## commands
 
@@ -8,10 +10,13 @@ Lifecycle scripts included in react-webpack-es6-boilerplate:
     npm run karma
 
 available via `npm run-script`:
-  assets:build
-    NODE_ENV=production webpack --config ./webpack.build.config.js --progress --profile --colors
-  assets:serve
-    NODE_ENV=development webpack-dev-server --config ./webpack.hot.assets.config.js --hot --progress --colors --port 2992 --inline --host 0.0.0.0
+  assets:build:form
+  assets:build:bootstrap
+  assets:serve:form
+  assets:serve:bootstrap
+  server:dev:form
+  server:dev:bootstrap
+
   packages:purge
     rm -rf node_modules
   packages:reinstall
@@ -41,9 +46,20 @@ available via `npm run-script`:
 ```
 
 ## development
+- `npm run assets:build:form` -  Full build for export but index.html will only include the form script.
 
-- `npm run assets:serve` - to serve assets only, use if index.html being served elsewhere, `localhost:2992/assets/`.
-- `npm run server:dev` - to run full server w/ index.html, `localhost:9999`.
+- `npm run assets:build:bootstrap` - Full build for export but index.html will only include the bootstrapping script.
+
+- `npm run assets:serve:form` - Serves the assets with hot reloading from http://localhost:2992/assets/. 
+Intended for running index.html from a different server.  Includes the form script only in the html file. Assets served from http://localhost:2992/assets/
+
+- `npm run assets:serve:bootstrap` - Serves the assets with hot reloading from http://localhost:2992/assets/ . Intended for running index.html from a different server Includes only the bootstrap script in the html file.  
+- `npm run server:dev:form` -  Full dev server with index from http://localhost:9999.  index.html loads the form script alone.
+
+- `npm run server:dev:bootstrap` -  Full dev server with index from http://localhost:9999.  index.html loads the bootstrap script alone.
+
+
+
 
 ## testing
 
