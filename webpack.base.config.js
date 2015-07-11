@@ -6,8 +6,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var _ = require('lodash');
 
 module.exports = function(customConfig) {
-  customConfig = customConfig || { plugins: [] };
 
+  customConfig = customConfig || { plugins: [] };
   if (!customConfig.plugins) {
     customConfig.plugins = [];
   }
@@ -19,12 +19,13 @@ module.exports = function(customConfig) {
 
   var cssLoader = 'style-loader!css-loader';
   var lessLoader = 'style-loader!css-loader!less-loader';
-  var scssLoader = 'style-loader!css-loader!sass-loader';
-
+  var scssLoader = 'style-loader!css-loader!sass-loader?sourceMap';
+  var bootstrap_scssLoader = scssLoader;
+  
   if (customConfig.build) {
     cssLoader = ExtractTextPlugin.extract('style-loader', 'css');
-    lessLoader = ExtractTextPlugin.extract('style-loader', 'css!less');
-    scssLoader = ExtractTextPlugin.extract('style-loader', 'css!sass');
+    scssLoader = ExtractTextPlugin.extract('style-loader', 'css!sass?sourceMap');
+    bootstrap_scssLoader = 'style!css!sass?sourceMap'  
   }
 
   var plugins = [
@@ -45,6 +46,15 @@ module.exports = function(customConfig) {
   }, customConfig.alias);
 
   return ({
+    entry: {
+      buff: [
+        './src/form/index.jsx'
+      ],
+      buffstrap: [
+        './src/bootstrap/index.js'
+      ]
+    },
+
     output: {
       path: path.join(__dirname, 'build', 'assets'),
       publicPath: '/assets/',
@@ -52,18 +62,6 @@ module.exports = function(customConfig) {
       chunkFilename: '[id].chunk.[hash].js',
       sourceMapFilename: 'debug/[file].map',
       pathinfo: true
-    },
-
-    cache: true,
-
-    debug: true,
-
-    devtool: 'eval',
-
-    entry: {
-      main: [
-        './src/index.jsx'
-      ]
     },
 
     resolve: {
@@ -75,7 +73,15 @@ module.exports = function(customConfig) {
 
     resolveLoader: { root: path.join(__dirname, 'node_modules') },
 
+    cache: true,
+
+    debug: true,
+
+    devtool: 'eval',
+
     externals: {},
+
+    plugins: plugins,
 
     module: {
       preLoaders: [
@@ -101,6 +107,16 @@ module.exports = function(customConfig) {
         },
         {
           test: /\.(scss|sass)$/,
+          include: [
+            path.resolve(__dirname, "src/bootstrap")
+          ],
+          loader: bootstrap_scssLoader
+        },        
+        {
+          test: /\.(scss|sass)$/,
+          include: [
+            path.resolve(__dirname, "src/form")
+          ],
           loader: scssLoader
         },
         {
@@ -141,9 +157,6 @@ module.exports = function(customConfig) {
         }
       ]
     },
-
-    plugins: plugins,
-
     eslint: {
       configFile: customConfig.eslintrcPath || path.join(__dirname, '.eslintrc'),
       emitError: customConfig.build,
