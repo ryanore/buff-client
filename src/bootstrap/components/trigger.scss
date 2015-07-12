@@ -1,0 +1,26 @@
+@import '../buffstrap';
+
+.buff-trigger{
+  color: #fff;
+  cursor: pointer;
+  background: $brand-main;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  &:before{
+    content: 'Feedback...';
+  }
+  &:hover{
+    background: lighten($brand-main, 15%);
+  }  
+  &[data-state = "loading"]{
+    background: $brand-highlight;
+    &:before{
+      content: 'getting buff...';
+    }
+    &:hover{
+      background: $brand-highlight;
+    }
+  }
+}

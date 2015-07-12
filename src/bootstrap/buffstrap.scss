@@ -1,28 +1,13 @@
 $brand-main: #222;
 $brand-highlight: #fc9911;
 
-.buff_trigger{
-  color: #fff;
-  cursor: pointer;
-  background: $brand-main;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 10px;
-  &:before{
-    content: 'Feedback...';
-  }
-
-  &.loading{
-    background: $brand-highlight;
-    &:before{
-      content: 'getting buff...';
-    }
-  }
-  &:hover{
-    background: lighten($brand-main, 15%);
-    &.loading{
-      background: $brand-highlight;
-    }
-  }
+// Position an object with percentages
+// This requires both directions
+@mixin position($top, $left){
+  position:absolute;
+  top:$top;
+  left:$left;
+  -webkit-transform:translate(-$left, -$top);
+  -moz-transform:translate(-$left, -$top);
+  -ms-transform:translate(-$left, -$top);
 }

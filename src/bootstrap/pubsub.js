@@ -4,18 +4,18 @@ class PubSub {
     this.handlers = [];
   }
 
-  trigger(event, data = {}) {
+  trigger(topic, data = {}) {
     for (let i = 0; i < this.handlers.length; i++) {
-      if (this.handlers[i].event === event) {
-        this.handlers[i].handler.call();
+      if (this.handlers[i].topic === topic) {
+        this.handlers[i].handler.call(this, data);
       }
     }
   }
 
-  on(evt, func, ctx) {
+  on(tpc, func, ctx) {
     let context = (typeof ctx === 'undefined') ? func : ctx;
     this.handlers.push({
-      event: evt,
+      topic: tpc,
       handler: func.bind(context)
     });
   }

@@ -1,0 +1,60 @@
+@import '../buffstrap';
+
+#buff-container{
+  box-sizing: border-box;
+  *{
+    box-sizing: inherit;
+  }
+  @media (min-width: 500px){
+    background: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index:9999;
+  }
+}
+
+#buff-modal{
+  position: absolute;
+  z-index:9999;
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  margin: 0;
+  padding: 2em;
+  min-width: 320px;
+  min-height: 370px;
+  @media (min-width: 500px){
+    width: 70%;
+    height: 60%;
+    max-width:500px;
+    max-height: 700px;
+    @include position(30%, 50%);
+  }
+  @media (min-width: 700px){
+    width: 50%;
+    height: 60%;
+    @include position(30%, 50%);
+  }
+
+}
+
+#buff-close{
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: 0;
+  height: 2em;
+  line-height: 2em;
+  padding: 0 1em;  
+  background: $brand-highlight;
+  font-size: 1em;
+  &:before{
+    content: 'close';
+  }
+}
+
+#buff-contents{
+  background: #fafafa;
+}
+

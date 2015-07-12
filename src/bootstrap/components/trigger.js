@@ -1,19 +1,23 @@
-import './buffstrap.scss';
-import pubsub from './pubsub';
+import './trigger.scss';
+import pubsub from '../pubsub';
 
 export default class BuffTrigger {
 
   constructor(id) {
-    this.el = this.buildTrigger();
+    this.el = this.build();
   }
 
   /**
    * Build a DOM element to be clicked.
    */
-  buildTrigger() {
+  build() {
+    if (typeof this.el !== 'undefined') {
+      return false;
+    }
     let el = document.createElement('div');
-    el.classList.add('buff_trigger');
+    el.classList.add('buff-trigger');
     el.addEventListener('click', handler => this.handleClick());
+    pubsub.on('loading-state', this.handleLoadingState.bind(this));
     document.body.appendChild(el);
     return el;
   }
@@ -25,12 +29,9 @@ export default class BuffTrigger {
   /**
    * Set any visual cue for loading state.
    */
-  handleLoadingState(loading) {
-    if (loading) {
-      this.el.classList.add('loading');
-    } else {
-      this.el.classList.remove('loading');
-    }
+  handleLoadingState(data) {
+    this.el.setAttribute('data-state', data.state);
+    return;
   }
 
 }
