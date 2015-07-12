@@ -3,7 +3,7 @@ import Application from './components/Application';
 
 class Buff {
   constructor() {
-    this.rootNode = document.getElementById('buff-contents');
+    this.rootNode = document.getElementById('buff');
   }
 
   mount() {
