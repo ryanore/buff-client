@@ -5,11 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="{%=o.htmlWebpackPlugin.options.description%}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="build" content="{%=o.htmlWebpackPlugin.options.buildDate.date%}" date="{%=o.htmlWebpackPlugin.options.buildDate.string%}" unix="{%=o.htmlWebpackPlugin.options.buildDate.unix%}">
     <title></title>
-    {% for (var css in o.htmlWebpackPlugin.files.css) { %}
-    <link href="{%=o.htmlWebpackPlugin.files.css[css] %}" rel="stylesheet">
-    {% } %}
   </head>
   <body>
     <h1>Production - Bootstrap</h1>

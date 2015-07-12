@@ -8,6 +8,7 @@ var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var buildDate = (new Date());
 var buildTarget = process.env.BUILD_TARGET || 'form';
+var ASSETS_PATH_FULLY_QUALIFIED = 'http://orestuff.com/assets';
 
 var tmpl = buildTarget === 'form' ? 'index' : 'bootstrap';
 
@@ -28,7 +29,7 @@ var config = _.merge(
       }),
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
-      new ExtractTextPlugin('[name]-[hash].css'),
+      new ExtractTextPlugin('[name].css'),
       new webpack.NoErrorsPlugin(),
       new HtmlWebpackPlugin({
         title: 'Production - '+buildTarget,
@@ -56,7 +57,7 @@ var config = _.merge(
   }),
   {
     output: {
-      publicPath: '/assets/',
+      publicPath: ASSETS_PATH_FULLY_QUALIFIED,
       filename: '[name].js'
     },
     cache: false,

@@ -1,9 +1,13 @@
 import React from 'react';
 import './temp.scss';
-
+/**
+ * Main Application
+ * State should be passed in from index
+ * Configuration
+ */
 export default React.createClass({
   componentDidMount() {
-    console.log('Component did mount');
+    // console.log('Component did mount');
   },
   render() {
     return (

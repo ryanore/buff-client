@@ -59,7 +59,7 @@ module.exports = function(customConfig) {
       path: path.join(__dirname, 'build', 'assets'),
       publicPath: '/assets/',
       filename: '[name].js',
-      chunkFilename: '[id].chunk.[hash].js',
+      chunkFilename: '[id].chunk.js',
       sourceMapFilename: 'debug/[file].map',
       pathinfo: true
     },
@@ -117,7 +117,8 @@ module.exports = function(customConfig) {
           include: [
             path.resolve(__dirname, "src/form")
           ],
-          loader: scssLoader
+          loader: bootstrap_scssLoader
+          // loader: scssLoader
         },
         {
           test: /\.(png|jpg|jpeg|gif|svg)$/,
