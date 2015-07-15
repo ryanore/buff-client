@@ -8,7 +8,7 @@ var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var buildDate = (new Date());
 var buildTarget = process.env.BUILD_TARGET || 'form';
-var ASSETS_PATH_FULLY_QUALIFIED = 'http://orestuff.com/assets';
+var ASSETS_PATH_FULLY_QUALIFIED = '/assets/';
 
 var tmpl = buildTarget === 'form' ? 'index' : 'bootstrap';
 

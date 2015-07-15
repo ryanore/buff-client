@@ -17,16 +17,15 @@ module.exports = function(customConfig) {
     jsLoader = 'react-hot!' + jsLoader;
   }
 
+  var scriptLoader = 'style-loader!css-loader';
   var cssLoader = 'style-loader!css-loader';
-  var lessLoader = 'style-loader!css-loader!less-loader';
   var scssLoader = 'style-loader!css-loader!sass-loader?sourceMap';
-  var bootstrap_scssLoader = scssLoader;
-  
-  if (customConfig.build) {
-    cssLoader = ExtractTextPlugin.extract('style-loader', 'css');
-    scssLoader = ExtractTextPlugin.extract('style-loader', 'css!sass?sourceMap');
-    bootstrap_scssLoader = 'style!css!sass?sourceMap'  
-  }
+
+  // DON'T EXTRACT.. INLINE ALL THE STYLES
+  // if (customConfig.build) {
+  //   cssLoader = ExtractTextPlugin.extract('style-loader', 'css');
+  //   scssLoader = ExtractTextPlugin.extract('style-loader', 'css!sass?sourceMap');
+  // }
 
   var plugins = [
     new webpack.DefinePlugin({
@@ -82,6 +81,12 @@ module.exports = function(customConfig) {
     externals: {},
 
     plugins: plugins,
+    
+    eslint: {
+      configFile: customConfig.eslintrcPath || path.join(__dirname, '.eslintrc'),
+      emitError: customConfig.build,
+      emitWarning: customConfig.test
+    },
 
     module: {
       preLoaders: [
@@ -102,24 +107,9 @@ module.exports = function(customConfig) {
           loader: cssLoader
         },
         {
-          test: /\.less$/,
-          loader: lessLoader
-        },
-        {
           test: /\.(scss|sass)$/,
-          include: [
-            path.resolve(__dirname, "src/bootstrap")
-          ],
-          loader: bootstrap_scssLoader
+          loader: scssLoader
         },        
-        {
-          test: /\.(scss|sass)$/,
-          include: [
-            path.resolve(__dirname, "src/form")
-          ],
-          loader: bootstrap_scssLoader
-          // loader: scssLoader
-        },
         {
           test: /\.(png|jpg|jpeg|gif|svg)$/,
           loader: 'url-loader?limit=10000&name=[name]-[hash].[ext]'
@@ -157,11 +147,6 @@ module.exports = function(customConfig) {
           loaders: ['html-loader', 'markdown-loader']
         }
       ]
-    },
-    eslint: {
-      configFile: customConfig.eslintrcPath || path.join(__dirname, '.eslintrc'),
-      emitError: customConfig.build,
-      emitWarning: customConfig.test
     }
   });
 };
