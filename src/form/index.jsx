@@ -15,11 +15,13 @@ class Buff {
     } else {
       throw new Error('The element #buff-contents does not exist.');
     }
+    return this;
   }
 
   unMount() {
     React.unmountComponentAtNode(this.rootNode);
+    return this;
   }
 }
 
-window.BUFF.form = new Buff();
+export default new Buff();
