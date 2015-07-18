@@ -1,7 +1,8 @@
 import './buffstrap.scss';
-import pubsub from './pubsub.js';
-import Trigger from './components/trigger.js';
-import FormContainer from './components/formContainer.js';
+import pubsub from './pubsub';
+import Trigger from './components/trigger';
+import FormContainer from './components/formContainer';
+import TEST_ID from '../config/app_id';
 
 class Bootstrap {
   /**
@@ -33,7 +34,8 @@ class Bootstrap {
   loadBuffAndMount() {
     pubsub.trigger('loading-state', {state: 'loading'});
     require.ensure([], () => {
-      this.buff = require('../form/index.jsx');
+      let Buff = require('../form/index.jsx');
+      this.buff = new Buff(TEST_ID);
       this.buff.mount();
       pubsub.trigger('loading-state', {state: 'loaded'});
     });

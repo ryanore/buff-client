@@ -1,21 +1,33 @@
 import React from 'react';
+import AltContainer from 'alt/AltContainer';
+import ConfigStore from '../stores/ConfigStore';
+import ConfigActions from '../actions/ConfigActions';
+import BuffForm from './BuffForm';
 import './temp.scss';
+
 /**
  * Main Application
  * State should be passed in from index
  * Configuration
  */
-export default React.createClass({
+export default class extends React.Component{
+  constructor() {
+    super();
+    let state = {
+      config: ConfigStore.getState()
+    };
+    this.state = state;
+  }
+
   componentDidMount() {
-    // console.log('Component did mount');
-  },
+    ConfigActions.fetchConfig();
+  }
+
   render() {
     return (
-      <div>
-        Hello react!
-        <p>Need modal</p>
-        <p>component will mount when called externally,  and unmount when closed internally.  Can be unmounted externally as well</p>
-      </div>
+      <AltContainer store={ConfigStore}>
+        <BuffForm />
+      </AltContainer>
     );
   }
-});
+}

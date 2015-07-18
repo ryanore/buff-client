@@ -4,14 +4,15 @@ import Application from './components/Application';
  * Main Entry for Buff form
  * Import Application and mount/unmount it on demand
  */
-class Buff {
-  constructor() {
+export default class Buff {
+  constructor(id) {
+    this.appId = id;
     this.rootNode = document.getElementById('buff');
   }
 
   mount() {
     if (this.rootNode) {
-      React.render(<Application />, this.rootNode);
+      React.render(<Application appid="{this.appid}" />, this.rootNode);
     } else {
       throw new Error('The element #buff-contents does not exist.');
     }
@@ -24,4 +25,5 @@ class Buff {
   }
 }
 
-export default new Buff();
+let b = new Buff('123');
+b.mount();
