@@ -6,8 +6,7 @@ class ConfigStore {
   constructor() {
     this.appConfig = {};
     this.bindListeners({
-      handleFetchConfig: ConfigActions.FETCH_CONFIG,
-      handleConfigLoaded: ConfigActions.UPDATE_CONFIG
+      handleFetchConfig: ConfigActions.FETCH_CONFIG
     });
   }
 
@@ -15,8 +14,8 @@ class ConfigStore {
     this.appConfig = data;
   }
 
-  handleFetchConfig() {
-    this.appConfig = null;
+  handleFetchConfig(data) {
+    this.appConfig = data;
   }
 }
 

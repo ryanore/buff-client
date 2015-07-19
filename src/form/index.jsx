@@ -9,7 +9,9 @@ export default class Buff {
     this.appId = id;
     this.rootNode = document.getElementById('buff');
   }
-
+  /**
+   * Render main app
+   */
   mount() {
     if (this.rootNode) {
       React.render(<Application appid="{this.appid}" />, this.rootNode);
@@ -18,7 +20,9 @@ export default class Buff {
     }
     return this;
   }
-
+  /**
+   * Remove main element from DOM
+   */
   unMount() {
     React.unmountComponentAtNode(this.rootNode);
     return this;

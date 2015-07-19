@@ -3,6 +3,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var PurifyCssPlugin = require('purifycss-loader/PurifyCssPlugin');
 var _ = require('lodash');
 
 module.exports = function(customConfig) {
@@ -18,7 +19,7 @@ module.exports = function(customConfig) {
   }
 
   var scriptLoader = 'style-loader!css-loader';
-  var cssLoader = 'style-loader!css-loader';
+  var cssLoader = 'style-loader!css-loader!purifycss-loader';
   var scssLoader = 'style-loader!css-loader!sass-loader?sourceMap';
 
   // DON'T EXTRACT.. INLINE ALL THE STYLES
@@ -109,7 +110,7 @@ module.exports = function(customConfig) {
         {
           test: /\.(scss|sass)$/,
           loader: scssLoader
-        },        
+        },
         {
           test: /\.(png|jpg|jpeg|gif|svg)$/,
           loader: 'url-loader?limit=10000&name=[name]-[hash].[ext]'

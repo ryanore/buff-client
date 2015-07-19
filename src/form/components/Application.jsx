@@ -2,8 +2,7 @@ import React from 'react';
 import AltContainer from 'alt/AltContainer';
 import ConfigStore from '../stores/ConfigStore';
 import ConfigActions from '../actions/ConfigActions';
-import BuffForm from './BuffForm';
-import './temp.scss';
+import BuffForm from './Form/Form';
 
 /**
  * Main Application
@@ -19,15 +18,23 @@ export default class extends React.Component{
     this.state = state;
   }
 
+  /**
+   * Form in DOM
+   * Get Data, cached of course
+   */
   componentDidMount() {
     ConfigActions.fetchConfig();
   }
 
   render() {
     return (
-      <AltContainer store={ConfigStore}>
-        <BuffForm />
-      </AltContainer>
+      <div id="buff-backdrop">
+        <div className="container-fluid" id="buff-form-container">
+          <AltContainer store={ConfigStore}>
+            <BuffForm />
+          </AltContainer>
+        </div>
+      </div>
     );
   }
 }
